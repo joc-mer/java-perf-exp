@@ -1,5 +1,7 @@
 package io.jocmer.exp.polymorphism;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -11,7 +13,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
 
 /**
  *
@@ -43,6 +44,16 @@ public class PolymorphismBenchmark {
         SingleImplInterface singleImplInterface = SingleImplementation.impl();
 
         ActualyFinalClass actualyFinalClass = new ActualyFinalClass();
+
+        Method method;
+
+        public BenchmarkState() {
+            try {
+                method = ActualyFinalClass.class.getDeclaredMethod("produceIntValue");
+            } catch (NoSuchMethodException | SecurityException ignore) {
+            }
+        }
+
     }
 
     @Benchmark
@@ -121,6 +132,17 @@ public class PolymorphismBenchmark {
     public void staticCallActualFinalClass(BenchmarkState s) {
         for (int i = 0; i < s.interrationCount; i++) {
             s.actualyFinalClass.produceIntValue();
+        }
+    }
+
+    @Benchmark
+    @OutputTimeUnit(TimeUnit.NANOSECONDS)
+    public void reflection(BenchmarkState s) {
+        for (int i = 0; i < s.interrationCount; i++) {
+            try {
+                s.method.invoke(s.actualyFinalClass);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ignore) {
+            }
         }
     }
 }
