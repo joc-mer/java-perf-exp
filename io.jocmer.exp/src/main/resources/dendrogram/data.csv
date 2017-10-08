@@ -1,0 +1,13 @@
+id,value,color
+structure,
+structure.constant complexity,
+structure.constant complexity.BloomFilter64bit,22.586,#E54F24
+structure.constant complexity.HashSet,21.328,#C54F24
+structure.constant complexity.LinkedHashSet,21.356,#D53F24
+structure.constant complexity.GoldmanSachsUnifiedSet,24.608,#A56F24
+structure.logarithmic complexity,
+structure.logarithmic complexity.BinarySearch,66.330,#6DB33F
+structure.logarithmic complexity.TreeSet,92.996,#6DB33F
+structure.logarithmic complexity.SkipList,115.217,#6DB33F
+structure.linear complexity,
+structure.linear complexity.CopyOnWriteArray,1093.185,#6DB33F
