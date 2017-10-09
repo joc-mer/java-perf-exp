@@ -87,10 +87,33 @@
             });
 
     var stratify = d3.stratify()            // This D3 API method gives cvs file flat data array dimensions.
-            .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+            .parentId(function (d) {
+                return d.id.substring(0, d.id.lastIndexOf("."));
+            });
 
-    d3.csv("data.csv", row, function(error, data) {
-        if (error) throw error;
+    var csvString = "id,value,color\n" +
+            "structure,\n" +
+            "structure.constant complexity,\n" +
+            "structure.constant complexity.BloomFilter64bit,22.586,#98abc5\n" +
+            "structure.constant complexity.HashSet,21.328,#8a89a6\n" +
+            "structure.constant complexity.LinkedHashSet,21.356,#7b6888\n" +
+            "structure.constant complexity.GoldmanSachsUnifiedSet,24.608,#6b486b\n" +
+            "structure.logarithmic complexity,\n" +
+            "structure.logarithmic complexity.BinarySearch,66.330,#a05d56\n" +
+            "structure.logarithmic complexity.TreeSet,92.996,#d0743c\n" +
+            "structure.logarithmic complexity.SkipList,115.217,#ff8c00\n" +
+            "structure.linear complexity,\n" +
+            "structure.linear complexity.CopyOnWriteArray,1093.185,#f1c40f";
+
+    var data = d3.csvParse(csvString, function (d, i, columns) {
+//        for (var i = 1, n = columns.length; i < n; ++i)
+//            d[columns[i]] = +d[columns[i]];
+        return d;
+    }
+    );
+
+//    d3.csv("data.csv", row, function(error, data) {
+//        if (error) throw error;
 
         var root = stratify(data);
         tree(root);
@@ -221,8 +244,6 @@
             leafG.select("rect")
                     .attr("stroke-width","0");
         }
-
-    });
 
     function row(d) {
         return {
