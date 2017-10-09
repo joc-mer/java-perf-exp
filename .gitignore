@@ -170,3 +170,6 @@ nbdist/
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,netbeans,intellij
 /io.jocmer.exp/nbproject/
+
+
+.DS_Store
