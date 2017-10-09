@@ -28,7 +28,7 @@ public class LauncherWithFormatedResultsTest {
         matrixer.set("20", "D", 3437d);
         matrixer.set("20", "E", 3438d);
         
-        System.out.println(matrixer.toJson());
+        System.out.println(matrixer.toArrayJson());
         
     }
     

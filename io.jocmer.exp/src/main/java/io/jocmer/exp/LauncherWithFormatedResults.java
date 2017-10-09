@@ -178,6 +178,65 @@ public class LauncherWithFormatedResults {
             return builder.toString();
         }
 
+    
+    public String toArrayJson() {
+            StringBuilder builder = new StringBuilder();
+
+            builder.append("[\n");
+
+//            builder.append("\t\"keys\":[");
+            boolean first = true;
+//            for (String column : columns) {
+//                if (first) {
+//                    first = false;
+//                } else {
+//                    builder.append(",");
+//                }
+//                builder.append("\"");
+//                builder.append(column);
+//                builder.append("\"");
+//            }
+//            builder.append("],\n");
+//
+//            builder.append("\t\"params\":[");
+//            first = true;
+//            for (String column : byLineMap.keySet()) {
+//                if (first) {
+//                    first = false;
+//                } else {
+//                    builder.append(",");
+//                }
+//                builder.append("\"");
+//                builder.append(column);
+//                builder.append("\"");
+//            }
+//            builder.append("]");
+
+            for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
+                if (first) {
+                        first = false;
+                    } else {
+                        builder.append(",");
+                    }
+                builder.append("{\"").append(benchmarkDimension).append("\" : ").append(entry.getKey()).append(", ");
+                for (String column : columns) {
+                    
+                    builder.append("\"").append(column).append("\": ");
+                    Double inMatrix = entry.getValue().get(column);
+                    if (inMatrix == null) {
+                        builder.append(defaultValue);
+                    } else {
+                        builder.append(inMatrix);
+                    }
+                }
+                builder.append("}\n");
+            }
+
+            builder.append("]\n");
+
+            return builder.toString();
+        }
+
     }
 
 }
