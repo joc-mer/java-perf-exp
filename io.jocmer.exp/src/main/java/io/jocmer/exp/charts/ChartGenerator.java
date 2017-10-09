@@ -62,7 +62,7 @@ public class ChartGenerator {
                 if (str.contains(CSV_TAG)) {
                     int index = str.indexOf(CSV_TAG);
                     writer.append(str.substring(0, index));
-                    String csvString = info.getMatrixer().toCsvString();
+                    String csvString = info.getMatrixer().toFlippedCsvString();
                     boolean first = true;
                     for (String csvLine : csvString.split("\n")) {
                         if (first) {

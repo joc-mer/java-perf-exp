@@ -42,7 +42,7 @@ public class Matrixer {
         });
     }
 
-    public String toCsvString() {
+    public String toFlippedCsvString() {
         StringBuilder builder = new StringBuilder();
         builder.append(benchmarkDimension);
         for (String column : columns) {
@@ -63,7 +63,7 @@ public class Matrixer {
         }
         return builder.toString();
     }
-
+    
     public String toJson() {
         StringBuilder builder = new StringBuilder();
         builder.append("{\n");
@@ -123,31 +123,6 @@ public class Matrixer {
         builder.append("[\n");
         //            builder.append("\t\"keys\":[");
         boolean first = true;
-        //            for (String column : columns) {
-        //                if (first) {
-        //                    first = false;
-        //                } else {
-        //                    builder.append(",");
-        //                }
-        //                builder.append("\"");
-        //                builder.append(column);
-        //                builder.append("\"");
-        //            }
-        //            builder.append("],\n");
-        //
-        //            builder.append("\t\"params\":[");
-        //            first = true;
-        //            for (String column : byLineMap.keySet()) {
-        //                if (first) {
-        //                    first = false;
-        //                } else {
-        //                    builder.append(",");
-        //                }
-        //                builder.append("\"");
-        //                builder.append(column);
-        //                builder.append("\"");
-        //            }
-        //            builder.append("]");
         for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
             if (first) {
                 first = false;
