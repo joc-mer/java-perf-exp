@@ -126,7 +126,7 @@ public class ListsFillUpBenchmark {
             blackhole.consume(objArray);
 
             for (int j = 0; j < addCount; j++) {
-                objArray[i] = obj;
+                objArray[j] = obj;
             }
         }
     }

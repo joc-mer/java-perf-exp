@@ -24,7 +24,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class ArithmeticBenchmark {
 
-    @Param({"5", "20"})
+    @Param({"20"})
     public int count;
 
     @Benchmark

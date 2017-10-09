@@ -1,14 +1,22 @@
 package io.jocmer.exp;
 
+import io.jocmer.exp.charts.ChartGenerator;
+import io.jocmer.exp.charts.Matrixer;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jmh.results.BenchmarkResult;
 import org.openjdk.jmh.results.Result;
 import org.openjdk.jmh.results.RunResult;
+import org.openjdk.jmh.results.format.ResultFormatFactory;
+import org.openjdk.jmh.runner.Defaults;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.CommandLineOptionException;
@@ -20,17 +28,37 @@ import org.openjdk.jmh.runner.options.CommandLineOptions;
  */
 public class LauncherWithFormatedResults {
 
-    public static void main(String... args) throws CommandLineOptionException, RunnerException {
+    public static void main(String... args) throws CommandLineOptionException, RunnerException, IOException {
         CommandLineOptions cmdOptions = new CommandLineOptions(args);
 
         Collection<RunResult> results = new Runner(cmdOptions).run();
 
-        System.out.println(results.size() + " results...");
-
-//        StringBuilder b = new StringBuilder();
-        Matrixer matrixer = new Matrixer("count", "Impl", 0d);
+        Map<String, ChartInfo> chartInfoMap = new LinkedHashMap<>();
+        
+        Map<String, List<RunResult>> resultsGroupByBenchmarkClass = new HashMap<>();
 
         for (RunResult result : results) {
+            String benchClassName = result.getParams().getBenchmark().replaceFirst("\\.[^.]*$", "");
+
+            ChartInfo ci = chartInfoMap.get(benchClassName);
+            Matrixer m;
+
+            if (ci == null) {
+                m = new Matrixer("params", "Benchmark", 0);
+                ci = new ChartInfo(m, result.getParams());
+                chartInfoMap.put(benchClassName, ci);
+            } else {
+                m = ci.matrixer;
+            }
+            
+            List<RunResult> resultsForThisClass = resultsGroupByBenchmarkClass.get(benchClassName);
+            
+            if(resultsForThisClass == null) {
+                resultsForThisClass = new LinkedList<>();
+                resultsGroupByBenchmarkClass.put(benchClassName, resultsForThisClass);
+            }
+            resultsForThisClass.add(result);
+
             Collection<BenchmarkResult> benchmarkResults = result.getBenchmarkResults();
 
             Collection<String> paramsKeys = result.getParams().getParamsKeys();
@@ -45,198 +73,30 @@ public class LauncherWithFormatedResults {
             }
 
             for (BenchmarkResult benchmarkResult : benchmarkResults) {
-                BenchmarkParams params = benchmarkResult.getParams();
                 Result primaryResult = benchmarkResult.getPrimaryResult();
-//                b.append(primaryResult.getLabel());
-//                b.append(",");
-//                b.append(primaryResult.getScore());
-//                b.append("\n");
-                matrixer.set(concatenatedParam, primaryResult.getLabel(), primaryResult.getScore());
+                m.set(concatenatedParam, primaryResult.getLabel(), primaryResult.getScore(), benchmarkResult.getScoreUnit());
             }
 
         }
 
-        System.out.println(matrixer.toCsvString());
-        System.out.println(matrixer.toJson());
-//        System.out.println(b);
+        for (Map.Entry<String, ChartInfo> entry : chartInfoMap.entrySet()) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos, true, "utf-8");
+
+            ResultFormatFactory.getInstance(
+                    Defaults.RESULT_FORMAT,
+                    ps
+            ).writeOut(resultsGroupByBenchmarkClass.get(entry.getKey()));
+
+            String content = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+            ps.close();
+            entry.getValue().setFormatedResult(content);
+
+            ChartGenerator chartGenerator = new ChartGenerator("/barchart/barchartTemplate.html");
+
+            chartGenerator.generateFromMatrix(entry.getValue(), "output/" + entry.getKey().replaceAll("\\.", "/") + ".html");
+        }
     }
 
-    public static class Matrixer {
-
-        Map<String, Map<String, Double>> byLineMap = new LinkedHashMap<>();
-        LinkedHashSet<String> columns = new LinkedHashSet<>();
-
-        final String paramDimension;
-        final String benchmarkDimension;
-        final double defaultValue;
-
-        public Matrixer(String paramDimension, String benchmarkDimension, double defaultValue) {
-            this.paramDimension = paramDimension;
-            this.benchmarkDimension = benchmarkDimension;
-            this.defaultValue = defaultValue;
-        }
-
-        public void set(final String lineKey, final String columnKey, final double value) {
-            columns.add(columnKey);
-
-            byLineMap.compute(lineKey, (k, cm) -> {
-                Map<String, Double> nm;
-                if (cm == null) {
-                    nm = new LinkedHashMap<>();
-                } else {
-                    nm = cm;
-                }
-                nm.put(columnKey, value);
-
-                return nm;
-            });
-        }
-
-        public String toCsvString() {
-            StringBuilder builder = new StringBuilder();
-
-            builder.append(benchmarkDimension);
-
-            for (String column : columns) {
-                builder.append(",");
-                builder.append(column);
-            }
-
-            for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
-                builder.append("\n").append(entry.getKey());
-                for (String column : columns) {
-                    builder.append(",");
-                    Double inMatrix = entry.getValue().get(column);
-                    if (inMatrix == null) {
-                        builder.append(defaultValue);
-                    } else {
-                        builder.append(inMatrix);
-                    }
-                }
-            }
-
-            return builder.toString();
-        }
-
-        public String toJson() {
-            StringBuilder builder = new StringBuilder();
-
-            builder.append("{\n");
-
-            builder.append("\t\"keys\":[");
-            boolean first = true;
-            for (String column : columns) {
-                if (first) {
-                    first = false;
-                } else {
-                    builder.append(",");
-                }
-                builder.append("\"");
-                builder.append(column);
-                builder.append("\"");
-            }
-            builder.append("],\n");
-
-            builder.append("\t\"params\":[");
-            first = true;
-            for (String column : byLineMap.keySet()) {
-                if (first) {
-                    first = false;
-                } else {
-                    builder.append(",");
-                }
-                builder.append("\"");
-                builder.append(column);
-                builder.append("\"");
-            }
-            builder.append("]");
-
-            for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
-                builder.append(",");
-                builder.append("\n");
-                builder.append("\t\"").append(entry.getKey()).append("\": {");
-                first = true;
-                for (String column : columns) {
-                    if (first) {
-                        first = false;
-                    } else {
-                        builder.append(",");
-                    }
-                    builder.append("\"").append(column).append("\": ");
-                    Double inMatrix = entry.getValue().get(column);
-                    if (inMatrix == null) {
-                        builder.append(defaultValue);
-                    } else {
-                        builder.append(inMatrix);
-                    }
-                }
-                builder.append("}");
-            }
-
-            builder.append("\n}\n");
-
-            return builder.toString();
-        }
-
-    
-    public String toArrayJson() {
-            StringBuilder builder = new StringBuilder();
-
-            builder.append("[\n");
-
-//            builder.append("\t\"keys\":[");
-            boolean first = true;
-//            for (String column : columns) {
-//                if (first) {
-//                    first = false;
-//                } else {
-//                    builder.append(",");
-//                }
-//                builder.append("\"");
-//                builder.append(column);
-//                builder.append("\"");
-//            }
-//            builder.append("],\n");
-//
-//            builder.append("\t\"params\":[");
-//            first = true;
-//            for (String column : byLineMap.keySet()) {
-//                if (first) {
-//                    first = false;
-//                } else {
-//                    builder.append(",");
-//                }
-//                builder.append("\"");
-//                builder.append(column);
-//                builder.append("\"");
-//            }
-//            builder.append("]");
-
-            for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
-                if (first) {
-                        first = false;
-                    } else {
-                        builder.append(",");
-                    }
-                builder.append("{\"").append(benchmarkDimension).append("\" : ").append(entry.getKey()).append(", ");
-                for (String column : columns) {
-                    
-                    builder.append("\"").append(column).append("\": ");
-                    Double inMatrix = entry.getValue().get(column);
-                    if (inMatrix == null) {
-                        builder.append(defaultValue);
-                    } else {
-                        builder.append(inMatrix);
-                    }
-                }
-                builder.append("}\n");
-            }
-
-            builder.append("]\n");
-
-            return builder.toString();
-        }
-
-    }
 
 }

@@ -25,15 +25,36 @@ public class StringConcatBenchmark {
 
     @State(Scope.Benchmark)
     public static class Samples {
-        public int intValue = 3579;
-        public long longValue = 13579L;
-        public String stringValue = "toto";
+
+        /**
+         * @return the intValue
+         */
+        public int getIntValue() {
+            return intValue;
+        }
+
+        /**
+         * @return the longValue
+         */
+        public long getLongValue() {
+            return longValue;
+        }
+
+        /**
+         * @return the stringValue
+         */
+        public String getStringValue() {
+            return stringValue;
+        }
+        private int intValue = 3579;
+        private long longValue = 13579L;
+        private String stringValue = "toto";
     }
 
     @Benchmark
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void plusOperator(Blackhole blackhole, Samples samples) {
-        String concatenated = "aaaa" + samples.intValue + "bbbb" + samples.longValue + "cccc" + samples.stringValue;
+        String concatenated = "aaaa" + samples.getIntValue() + "bbbb" + samples.getLongValue() + "cccc" + samples.getStringValue();
         blackhole.consume(concatenated);
     }
 
@@ -42,11 +63,11 @@ public class StringConcatBenchmark {
     public void stringBuilder(Blackhole blackhole, Samples samples) {
         StringBuilder builder = new StringBuilder();
         String concatenated = builder.append("aaaa").
-                append(samples.intValue).
+                append(samples.getIntValue()).
                 append("bbbb").
-                append(samples.longValue).
+                append(samples.getLongValue()).
                 append("cccc").
-                append(samples.stringValue).toString();
+                append(samples.getStringValue()).toString();
         blackhole.consume(concatenated);
     }
 
@@ -54,11 +75,11 @@ public class StringConcatBenchmark {
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void plusEqualOperator(Blackhole blackhole, Samples samples) {
         String concatenated = "aaaa";
-        concatenated += samples.intValue;
+        concatenated += samples.getIntValue();
         concatenated += "bbbb";
-        concatenated += samples.longValue;
+        concatenated += samples.getLongValue();
         concatenated += "cccc";
-        concatenated += samples.stringValue;
+        concatenated += samples.getStringValue();
         blackhole.consume(concatenated);
     }
 
