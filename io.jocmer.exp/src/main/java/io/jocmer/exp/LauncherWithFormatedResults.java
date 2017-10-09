@@ -92,7 +92,10 @@ public class LauncherWithFormatedResults {
             ps.close();
             entry.getValue().setFormatedResult(content);
 
-            ChartGenerator chartGenerator = new ChartGenerator("/barchart/barchartTemplate.html");
+//            String template = entry.getValue().getMatrixer().isSingleDimension() ? "/barchart/sortableBarChartTemplate.html" : "/barchart/barchartTemplate.html";
+            String template = "/barchart/barchartTemplate.html";
+            
+            ChartGenerator chartGenerator = new ChartGenerator(template);
 
             chartGenerator.generateFromMatrix(entry.getValue(), "output/" + entry.getKey().replaceAll("\\.", "/") + ".html");
         }

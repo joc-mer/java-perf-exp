@@ -36,7 +36,7 @@ var y = d3.scaleLinear()
 var z = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#f1c40f", "#e5e40f", "#82e0aa", "#52be80"]);
 
-var csvString = ###CSV###;
+var csvString = ###CSV_FLIPPED###;
 
 var data = d3.csvParse(csvString, function(d, i, columns) {
   for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];

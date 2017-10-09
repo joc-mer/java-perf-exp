@@ -17,8 +17,8 @@ import org.openjdk.jmh.infra.Blackhole;
  * @author joc
  */
 @BenchmarkMode(Mode.Throughput)
-@Warmup(iterations = 4, time = 1)
-@Measurement(iterations = 5, time = 1)
+@Warmup(iterations = 4, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 5, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @Fork(1)
 @State(Scope.Benchmark)
 public class StringConcatBenchmark {

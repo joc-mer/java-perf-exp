@@ -59,26 +59,21 @@ public class ChartGenerator {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
             String str = reader.readLine();
             while (str != null) {
-                if (str.contains(CSV_TAG)) {
-                    int index = str.indexOf(CSV_TAG);
-                    writer.append(str.substring(0, index));
+                if (str.contains(CSV_FLIPPED)) {
+                    int index = str.indexOf(CSV_FLIPPED);
                     String csvString = info.getMatrixer().toFlippedCsvString();
-                    boolean first = true;
-                    for (String csvLine : csvString.split("\n")) {
-                        if (first) {
-                            first = false;
-                        } else {
-                            writer.append("\" + \n\t");
-                        }
-                        writer.append("\"").append(csvLine).append("\\n");
-                    }
-                    writer.append("\"");
+                    substituteCSV(writer, str, index, info, csvString);
+                    writer.append(str.substring(index + CSV_FLIPPED.length(), str.length()));
+                } else if (str.contains(CSV_TAG)) {
+                    int index = str.indexOf(CSV_TAG);
+                    String csvString = info.getMatrixer().toCsvString();
+                    substituteCSV(writer, str, index, info, csvString);
                     writer.append(str.substring(index + CSV_TAG.length(), str.length()));
                 } else if (str.contains(SCALE_TAG)) {
                     writer.append(str.replace(SCALE_TAG, info.getMatrixer().getScale()));
                 } else if (str.contains(RAW_OUTPUT)) {
-                    for(String rawLine : info.getFormatedResult().split("\n")) {
-                       writer.append(rawLine).append("<br/>");
+                    for (String rawLine : info.getFormatedResult().split("\n")) {
+                        writer.append(rawLine).append("<br/>");
                     }
                 } else {
                     writer.append(str).append("\n");
@@ -89,7 +84,22 @@ public class ChartGenerator {
             writer.close();
         }
     }
+
+    private void substituteCSV(BufferedWriter writer, String str, int index, ChartInfo info, String csvString) throws IOException {
+        writer.append(str.substring(0, index));
+        boolean first = true;
+        for (String csvLine : csvString.split("\n")) {
+            if (first) {
+                first = false;
+            } else {
+                writer.append("\" + \n\t");
+            }
+            writer.append("\"").append(csvLine).append("\\n");
+        }
+        writer.append("\"");
+    }
     private static final String CSV_TAG = "###CSV###";
+    private static final String CSV_FLIPPED = "###CSV_FLIPPED###";
     private static final String SCALE_TAG = "###SCALE###";
     private static final String RAW_OUTPUT = "###RAW_OUTPUT###";
 }

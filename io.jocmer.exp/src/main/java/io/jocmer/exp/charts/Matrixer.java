@@ -16,13 +16,13 @@ public class Matrixer {
     private final String benchmarkDimension;
     private final double defaultValue;
     private String scale;
-
+    
     public Matrixer(String paramDimension, String benchmarkDimension, double defaultValue) {
         this.paramDimension = paramDimension;
         this.benchmarkDimension = benchmarkDimension;
         this.defaultValue = defaultValue;
     }
-
+    
     public String getScale() {
         return scale;
     }
@@ -41,7 +41,7 @@ public class Matrixer {
             return nm;
         });
     }
-
+    
     public String toFlippedCsvString() {
         StringBuilder builder = new StringBuilder();
         builder.append(benchmarkDimension);
@@ -62,6 +62,22 @@ public class Matrixer {
             }
         }
         return builder.toString();
+    }
+    
+    public String toCsvString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(paramDimension).append(", ").append(scale).append("\n");
+        
+        for (Map.Entry<String, Map<String, Double>> entry : byLineMap.entrySet()) {
+            for (Map.Entry<String, Double> entry2 : entry.getValue().entrySet()) {
+                builder.append(entry2.getKey()).append(", ").append(entry2.getValue()).append("\n");
+            }
+        }
+        return builder.toString();
+    }
+    
+    public boolean isSingleDimension() {
+        return byLineMap.size() == 1;
     }
     
     public String toJson() {
@@ -117,7 +133,7 @@ public class Matrixer {
         builder.append("\n}\n");
         return builder.toString();
     }
-
+    
     public String toArrayJson() {
         StringBuilder builder = new StringBuilder();
         builder.append("[\n");
