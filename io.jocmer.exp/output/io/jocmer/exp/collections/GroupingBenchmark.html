@@ -12,7 +12,7 @@
 </style>
 <svg width="1100" height="600"></svg>
 <div class="raw">
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapCompute","avgt",1,5,"33,565207","3,711652","ms/op"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapContainsThenGetAndPut","avgt",1,5,"44,245847","8,251712","ms/op"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapGetThenPut","avgt",1,5,"40,545238","6,746418","ms/op"<br/></div>
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapCompute","avgt",1,5,"32,857031","5,066448","ms/op"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapContainsThenGetAndPut","avgt",1,5,"42,432824","7,778095","ms/op"<br/>"io.jocmer.exp.collections.GroupingBenchmark.hashMapGetThenPut","avgt",1,5,"38,261341","9,921630","ms/op"<br/></div>
 <script src="https://d3js.org/d3.v4.js"></script>
 <script  type="text/javascript">
 
@@ -36,7 +36,7 @@ var z = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#f1c40f", "#e5e40f", "#82e0aa", "#52be80"]);
 
 var csvString = "Benchmark,hashMapCompute,hashMapContainsThenGetAndPut,hashMapGetThenPut\n" + 
-	",33.56520724935855,44.24584658221344,40.545238242028496\n";
+	",32.85703108807702,42.43282381495652,38.26134058322167\n";
 var data = d3.csvParse(csvString, function(d, i, columns) {
   for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
   return d;

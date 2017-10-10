@@ -12,7 +12,7 @@
 </style>
 <svg width="1100" height="600"></svg>
 <div class="raw">
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: count"<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.bigDecimal","avgt",1,5,"213,190104","167,681424","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.primitiveDouble","avgt",1,5,"7,760638","0,482454","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.primitiveInteger","avgt",1,5,"8,596646","1,135760","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.primitiveLong","avgt",1,5,"8,064594","0,558401","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.primitiveShort","avgt",1,5,"11,367328","1,154346","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.primitivefloat","avgt",1,5,"7,820325","0,751891","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.wrapperDouble","avgt",1,5,"208,615096","447,160809","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.wrapperFloat","avgt",1,5,"118,480626","133,647622","ns/op",20<br/>"io.jocmer.exp.misc.ArithmeticBenchmark.wrapperInteger","avgt",1,5,"116,165764","141,613720","ns/op",20<br/></div>
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: interrationCount"<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.callOfFinalClass","avgt",1,5,"0,701798","0,026923","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.dynamicCallLambda","avgt",1,5,"0,925471","0,066710","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.dynamicCallOfFinalOverride","avgt",1,5,"0,922582","0,037325","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.dynamicCallOfInterfaceImpl","avgt",1,5,"0,925392","0,013731","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.dynamicCallOfNotFinalOverride","avgt",1,5,"0,917715","0,041077","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.dynamicCallSingleImpl","avgt",1,5,"0,938056","0,053516","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.emptyLoop","avgt",1,5,"0,355754","0,013093","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.reflection","avgt",1,5,"2232,691416","83,742994","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.staticCallActualFinalClass","avgt",1,5,"0,698264","0,038436","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.staticCallOfFinalOverride","avgt",1,5,"0,704206","0,070639","ns/op",500<br/>"io.jocmer.exp.polymorphism.PolymorphismBenchmark.staticCallOfNotFinalOverride","avgt",1,5,"0,706142","0,033572","ns/op",500<br/></div>
 <script src="https://d3js.org/d3.v4.js"></script>
 <script  type="text/javascript">
 
@@ -35,8 +35,8 @@ var y = d3.scaleLinear()
 var z = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#f1c40f", "#e5e40f", "#82e0aa", "#52be80"]);
 
-var csvString = "Benchmark,bigDecimal,primitiveDouble,primitiveInteger,primitiveLong,primitiveShort,primitivefloat,wrapperDouble,wrapperFloat,wrapperInteger\n" + 
-	"20,213.190103735012,7.760638010266986,8.596645513818778,8.064593532581288,11.367327955447692,7.820324979689451,208.61509578455986,118.48062603331718,116.16576367534913\n";
+var csvString = "Benchmark,callOfFinalClass,dynamicCallLambda,dynamicCallOfFinalOverride,dynamicCallOfInterfaceImpl,dynamicCallOfNotFinalOverride,dynamicCallSingleImpl,emptyLoop,reflection,staticCallActualFinalClass,staticCallOfFinalOverride,staticCallOfNotFinalOverride\n" + 
+	"500,0.7017984585260424,0.9254707533677099,0.9225820345653911,0.9253923561434731,0.9177148446433316,0.9380559284765179,0.35575369962764414,2232.6914158745985,0.6982639039640448,0.7042060934579514,0.7061423678213117\n";
 var data = d3.csvParse(csvString, function(d, i, columns) {
   for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
   return d;

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<style>
+
+.axis .domain {
+  display: none;
+}
+
+.raw {
+    font-family: Courier New;
+}
+
+</style>
+<svg width="1100" height="600"></svg>
+<div class="raw">
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: inserted"<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"6,398450","1,397664","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"11,366210","2,731311","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"15,335835","2,023249","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"56,455324","71,595827","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"98,837086","63,022852","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"383,497232","55,427702","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.arrayList","avgt",1,3,"730,960038","40,859316","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"2,127512","0,734764","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"12,071648","2,750518","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"16,436058","7,213076","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"25,877375","6,884328","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"32,463981","26,422488","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"47,496577","19,443469","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.binarySearch","avgt",1,3,"52,438755","5,337843","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"7,964325","0,884307","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"12,729313","4,397712","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"20,941709","52,785201","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"51,261974","18,366945","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"94,689748","28,892012","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"965,599772","6719,876209","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.copyOnWriteArray","avgt",1,3,"746,838551","181,479459","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"2,680895","0,295586","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"2,740808","0,356530","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"2,713069","0,098479","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"2,767321","0,782754","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"2,801893","3,975015","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"3,080422","4,884582","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.emptyLoop","avgt",1,3,"3,081833","1,862827","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"7,308252","0,957662","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"23,063879","29,638830","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"21,211981","44,152859","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"19,080661","48,655807","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"23,864062","125,010617","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"26,734951","159,563715","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.goldmanSachsUnifiedSet","avgt",1,3,"23,456929","65,476113","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"12,552238","16,989583","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"29,553284","319,280060","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"26,241075","82,248146","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"10,372090","1,512072","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"20,058216","24,517464","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"19,862831","19,580336","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.hashSet","avgt",1,3,"23,444006","112,601149","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"15,141059","64,517152","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"16,717463","50,873979","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"21,248290","60,989890","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"18,848657","1,759512","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"18,625793","36,309629","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"20,466125","32,443383","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedHashSet","avgt",1,3,"47,661666","752,644096","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"10,302703","28,818210","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"12,186132","0,740596","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"25,717007","18,953868","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"129,280010","40,008955","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"239,058616","14,645176","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"1139,744914","233,542952","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.linkedList","avgt",1,3,"3080,612828","731,215341","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"3,538175","0,416679","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"6,664295","11,617220","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"10,194005","18,010620","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"17,588138","22,867902","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"18,328921","26,279843","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"19,244552","40,172140","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.naiveLongBloomFilter","avgt",1,3,"13,334087","6,251861","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"17,558185","31,531320","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"26,418725","4,569495","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"31,990774","5,561815","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"55,737355","36,932483","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"64,692880","2,593919","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"90,531395","73,819662","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.skipList","avgt",1,3,"107,563161","40,646694","ms/op",1000<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"14,453618","38,489583","ms/op",1<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"21,977572","36,047610","ms/op",5<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"32,628333","15,923466","ms/op",10<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"39,882330","14,688709","ms/op",50<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"55,721365","46,667848","ms/op",100<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"84,871887","29,096660","ms/op",500<br/>"io.jocmer.exp.collections.MassiveContainsCallsBenchmark.treeSet","avgt",1,3,"89,325177","60,170652","ms/op",1000<br/></div>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script  type="text/javascript">
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var x0 = d3.scaleBand()
+    .rangeRound([0, width])
+    .paddingInner(0.1);
+
+var x1 = d3.scaleBand()
+    .padding(0.05);
+
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+var z = d3.scaleOrdinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#f1c40f", "#e5e40f", "#82e0aa", "#52be80"]);
+
+var csvString = "Benchmark,arrayList,binarySearch,copyOnWriteArray,emptyLoop,goldmanSachsUnifiedSet,hashSet,linkedHashSet,linkedList,naiveLongBloomFilter,skipList,treeSet\n" + 
+	"1,6.398449634379721,2.1275123811853622,7.964324534455128,2.680894587675883,7.308252073775017,12.55223841958042,15.141059127534113,10.302702601222466,3.538174524465537,17.558185245437002,14.453617988813813\n" + 
+	"5,11.36621022929293,12.07164772739018,12.729312548087348,2.7408082322436305,23.063879189574312,29.55328376961927,16.717462931371198,12.186132226480836,6.664295353383879,26.41872532017544,21.977572276031747\n" + 
+	"10,15.335835314913844,16.43605792049731,20.941709108126442,2.7130688337122186,21.211981496947498,26.241075111928108,21.248289526409412,25.717007104761905,10.194005038714186,31.990773979166665,32.62833346944444\n" + 
+	"50,56.45532391481481,25.877374683333333,51.26197435151516,2.7673207449197164,19.0806606280693,10.37209010685941,18.848656604938274,129.28001016666667,17.58813844506173,55.73735521851851,39.88233017948718\n" + 
+	"100,98.83708573333332,32.463980996078426,94.68974838888887,2.801892651766156,23.864062288690473,20.05821633809524,18.625793390512516,239.0586162222222,18.32892100964591,64.69288041666665,55.72136506296297\n" + 
+	"500,383.49723216666666,47.49657706060606,965.5997721666666,3.080422366915643,26.734950954212454,19.862831015238093,20.466125165708814,1139.7449136666667,19.244552428024083,90.53139461111111,84.87188744444445\n" + 
+	"1000,730.960038,52.43875503333334,746.8385513333333,3.081833398219949,23.45692870052754,23.444006089324617,47.661665671879696,3080.6128283333333,13.33408731533963,107.56316146666666,89.32517716666666\n";
+var data = d3.csvParse(csvString, function(d, i, columns) {
+  for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+  return d;
+}
+);
+
+  console.log(JSON.stringify(data));
+
+  var keys = data.columns.slice(1);
+
+  x0.domain(data.map(function(d) { return d.Benchmark; }));
+  x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
+
+  g.append("g")
+    .selectAll("g")
+    .data(data)
+    .enter().append("g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Benchmark) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) { return x1(d.key); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("width", x1.bandwidth())
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("fill", function(d) { return z(d.key); });
+
+  g.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x0));
+
+  g.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y).ticks(null, "s"))
+    .append("text")
+      .attr("x", 2)
+      .attr("y", y(y.ticks().pop()) + 0.5)
+      .attr("dy", "0.32em")
+      .attr("fill", "#000")
+      .attr("font-weight", "bold")
+      .attr("text-anchor", "start")
+      .text("ms/op");
+  var legend = g.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 14)
+      .attr("text-anchor", "end")
+    .selectAll("g")
+    .data(keys.slice().reverse())
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 24)
+      .attr("width", 24)
+      .attr("height", 24)
+      .attr("fill", z);
+
+  legend.append("text")
+      .attr("x", width - 29)
+      .attr("y", 9.5)
+      .attr("dy", "0.32em")
+      .text(function(d) { return d; });
+
+</script>

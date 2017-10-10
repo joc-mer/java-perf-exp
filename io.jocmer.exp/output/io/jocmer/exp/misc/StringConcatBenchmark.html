@@ -12,7 +12,7 @@
 </style>
 <svg width="1100" height="600"></svg>
 <div class="raw">
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.plusEqualOperator","thrpt",1,5,"9946,738680","627,955416","ops/ms"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.plusOperator","thrpt",1,5,"9636,478357","282,104125","ops/ms"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.stringBuilder","thrpt",1,5,"9742,690712","845,433805","ops/ms"<br/></div>
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.plusEqualOperator","thrpt",1,5,"10014,462011","487,339433","ops/ms"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.plusOperator","thrpt",1,5,"9536,731583","1919,489255","ops/ms"<br/>"io.jocmer.exp.misc.StringConcatBenchmark.stringBuilder","thrpt",1,5,"9660,779198","1271,602361","ops/ms"<br/></div>
 <script src="https://d3js.org/d3.v4.js"></script>
 <script  type="text/javascript">
 
@@ -36,7 +36,7 @@ var z = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#f1c40f", "#e5e40f", "#82e0aa", "#52be80"]);
 
 var csvString = "Benchmark,plusEqualOperator,plusOperator,stringBuilder\n" + 
-	",9946.738680347662,9636.478357411697,9742.690712384032\n";
+	",10014.46201106529,9536.731583125502,9660.779197562222\n";
 var data = d3.csvParse(csvString, function(d, i, columns) {
   for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
   return d;
